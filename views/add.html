@@ -1,0 +1,52 @@
+{{include "share-nav"}}
+		
+		<!-- 添加学生信息表单 -->
+		<div class="container">
+			<form action="/student/{{if student}}update?_id={{student.id}}{{else}}add{{/if}}" method="post" class="form-horizontal" role="form">
+		    	<!-- 姓名 -->
+		    	<div class="form-group">
+		    		<label for="name" class="col-xs-3 control-label">姓名</label>
+		    		<input type="text" class="col-xs-7" name="name" id="name" required pattern="^[\u4e00-\u9fa5]{2,4}$" placeholder="请输入名字" {{if student}} value="{{student.name}}" {{/if}}>
+		    	</div>
+		    	<!-- 年龄 -->
+		    	<div class="form-group">
+		    		<label for="age" class="col-xs-3 control-label">年龄</label>
+		    		<input type="number" class="col-xs-7" name="age" id="age" required step="1" {{if student}} {{if student}} value="{{student.age}}"  {{/if}}{{/if}} value="20" >
+		    	</div>
+		    	<!-- 性别 -->
+		    	<div class="form-group">
+		    		<label class="col-xs-3 control-label">性别</label>
+		    		<label for="male" class="radio-inline">
+		    			<input type="radio" name="gender" id="male" value="true" checked />男
+		    		</label>
+		    		<label for="female" class="radio-inline">
+		    			<input type="radio" name="gender" id="female" value="false" {{if student&&!student.gender}} checked {{/if}} />女
+		    		</label>
+		    	</div>  
+		    	<!-- 号码 -->
+		    	<div class="form-group">
+		    		<label for="phone" class="col-xs-3 control-label">号码</label>
+		    		<input type="tel" class="col-xs-7" name="phone" id="phone" required pattern="^1[3|4|5|7|8]\d{9}$" placeholder="请输入号码" {{if student}} value="{{student.phone}}" {{/if}}>
+		    	</div>
+		    	<!-- 邮箱 -->
+		    	<div class="form-group">
+		    		<label for="email" class="col-xs-3 control-label">邮箱</label>
+		    		<input type="email" class="col-xs-7" name="email" id="email" required pattern="^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$" placeholder="请输入邮箱" {{if student}} value="{{student.email}}" {{/if}}>
+		    	</div>
+		    	<!-- 备注 -->
+		    	<div class="form-group">
+		    		<label for="detail" class="col-xs-3 control-label">备注</label>
+		    		<textarea name="detail" id="detail" class="col-xs-7">{{if student }}{{student.detail}} {{else}}无{{/if}}</textarea>
+		    	</div>
+		    	<!-- 提交按钮 -->
+		    	<div class="form-group">
+		    		<div class="col-xs-offset-2 col-xs-8">
+		    			<button type="submit" class="form-control btn btn-primary">{{submitTitle}}</button>
+		    		</div>
+		    	</div>
+			</form>
+		</div>
+	</body>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</html>
