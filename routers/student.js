@@ -140,6 +140,28 @@ router.post("/update",function(req,res){
 //搜索学生信息
 router.get("/search",function(req,res){
 	console.log(req.query);
-})
+	//获取（拼接）搜索条件
+	var condition = {};
+	if(req.query.name){
+//		var reg = new RegExp(req.query.name);
+		condition.name = {$regex: req.query.name};
+	}
+	if(req.query.gender == "true"){
+		condition.gender = "true";
+	}else if(req.query.gender == "false"){
+		condition.gender = "false";
+	}
+	
+	if(req.query.phone){
+		condition.phone  = {$regex: req.query.phone};
+	}
+	console.log(condition);
+	Student.find(condition,function(err,data){
+		console.log(data);
+		if(!err){
+			res.status(200).json({data});
+		}
+	});
+});
 
 module.exports = router;
